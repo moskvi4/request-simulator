@@ -1,0 +1,21 @@
+.requests-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.requests-list__item {
+    display: flex;
+    text-align: left;
+    margin-top: 12px;
+}
+
+.requests-list__name {
+    width: 300px;
+    margin-right: 24px;
+}
+
+.requests-list__delay {
+    width: 100px;
+    margin-right: 24px;
+}

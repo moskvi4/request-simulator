@@ -1,0 +1,9 @@
+.requests-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.requests-actions__run {
+    margin-right: 24px;
+}

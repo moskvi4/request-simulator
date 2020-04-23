@@ -1,0 +1,15 @@
+.add-request-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.add-request-row__name {
+    width: 300px;
+    margin-right: 24px;
+}
+
+.add-request-row__delay {
+    width: 100px;
+    margin-right: 24px;
+}

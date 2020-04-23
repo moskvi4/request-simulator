@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import {connect} from 'react-redux';
+import Spinner from '@atlaskit/spinner';
+import AddRequestRow from './components/AddRequestRow';
+import RequestsList from './components/RequestsList';
+import RequestsActions from './components/RequestsActions';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App({currentRequest}) {
+    return (
+        <div className='App'>
+            <p>Request simulator</p>
+            <div className='content'>
+                <div className='requests'>
+                    <AddRequestRow/>
+                    <RequestsList/>
+                    <RequestsActions/>
+                </div>
+                {currentRequest &&
+                <div className='loading'>
+                    <Spinner size='xlarge' className='spinner'/>
+                    {currentRequest.name}
+                    <br/>
+                    {`(${currentRequest.delay} sec left)`}
+                </div>}
+            </div>
+        </div>
+    );
 }
 
-export default App;
+const mapStateToProps = state => ({
+    currentRequest: state.requests.currentRequest
+});
+
+export default connect(mapStateToProps)(App);
