@@ -5,11 +5,15 @@ import {actions} from '../../actions';
 import './RequestsActions.css';
 
 function RequestsActions(props) {
-    const {start, stop, requesting} = props;
+    const {start, stop, requesting, empty} = props;
     
     return (
         <div className='requests-actions'>
-            <Button appearance='primary' className='requests-actions__run' onClick={start} isDisabled={requesting}>
+            <Button
+                appearance='primary'
+                className='requests-actions__run'
+                onClick={start}
+                isDisabled={requesting || empty}>
                 Run
             </Button>
             <Button className='requests-actions__stop' onClick={stop} isDisabled={!requesting}>
@@ -20,7 +24,8 @@ function RequestsActions(props) {
 }
 
 const mapStateToProps = state => ({
-        requesting: state.requests.requesting
+        requesting: state.requests.requesting,
+        empty: state.requests.requests.length === 0
     }),
     mapDispatchToProps = dispatch => ({
         start: () => dispatch({type: actions.START_REQUESTS}),

@@ -10,6 +10,7 @@ const options = Array.from({length: 10}).map((elem, index) => ({label: index + 1
 
 function AddRequestRow(props) {
     const {name, delay, addRequest, changeName, changeDelay, totalRequestsCount} = props;
+    const trimmedName = name.trim();
     
     return (
         <div className='add-request-row'>
@@ -28,7 +29,7 @@ function AddRequestRow(props) {
             <Button
                 className='add-request-row__add'
                 onClick={addRequest}
-                isDisabled={!name || !delay || totalRequestsCount >= 10}>
+                isDisabled={!trimmedName || !delay || totalRequestsCount >= 10}>
                 Add
             </Button>
         </div>
@@ -41,7 +42,7 @@ const mapStateToProps = ({requests}) => ({
         totalRequestsCount: requests.requests.length
     }),
     mapDispatchToProps = dispatch => ({
-        addRequest: () => dispatch({type: actions.ADD_REQUEST, payload: {}}),
+        addRequest: () => dispatch({type: actions.ADD_REQUEST}),
         changeName: ({target: {value}}) => dispatch({type: actions.CHANGE_NAME, payload: value}),
         changeDelay: ({value}) => dispatch({type: actions.CHANGE_DELAY, payload: value})
     });

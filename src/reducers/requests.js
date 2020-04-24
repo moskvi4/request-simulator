@@ -15,7 +15,15 @@ function requests(state = defaultState, action) {
             
             return {
                 ...state,
-                requests: [...requests, {name, delay, id: new Date().getTime()}],
+                requests: [
+                    ...requests,
+                    {
+                        name: name.trim(),
+                        delay,
+                        id: new Date().getTime(),
+                        requested: false
+                    }
+                ],
                 name: '',
                 delay: 1
             };
@@ -48,6 +56,26 @@ function requests(state = defaultState, action) {
             return {
                 ...state,
                 requesting: action.payload
+            };
+        }
+        case actions.SET_REQUESTED: {
+            const {id, requested} = action.payload;
+            
+            return {
+                ...state,
+                requests: state.requests.map(request => {
+                    if (request.id === id) {
+                        return {...request, requested};
+                    } else {
+                        return request;
+                    }
+                })
+            };
+        }
+        case actions.SET_REQUESTED_ALL: {
+            return {
+                ...state,
+                requests: state.requests.map(request => ({...request, requested: action.payload}))
             };
         }
         default:
