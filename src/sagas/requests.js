@@ -23,7 +23,7 @@ function* startRequests() {
         while (requests.length > 0 && requesting) {
             const [request] = requests;
             
-            yield put({type: actions.SET_CURRENT_REQUEST, payload: request});
+            yield put({type: actions.SET_CURRENT_REQUEST, payload: {...request}});
             yield put({type: actions.SET_REQUESTED, payload: {id: request.id, requested: true}});
             
             for (let i = 1; i <= request.delay; i++) {
